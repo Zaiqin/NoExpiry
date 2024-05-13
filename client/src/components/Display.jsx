@@ -4,6 +4,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import '../Display.css'
+import { auth } from '../firebase';
 
 const localizer = momentLocalizer(moment);
 
@@ -11,6 +12,26 @@ const Display = ({ submit, setSubmit }) => {
     const [savedData, setSavedData] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [currentView, setCurrentView] = useState(moment().format('M Y')); // Initial value
+    const [currentEmail, setCurrentEmail] = useState();
+
+    useEffect(() => {
+        // Listen for changes in authentication state
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                setCurrentEmail(user.email);
+            } else {
+                setCurrentEmail(null);
+            }
+        });
+
+        // Clean up function
+        return () => unsubscribe();
+    }, []); // Empty dependency array to run once on mount
+
+    useEffect(() => {
+      if (currentEmail) getItems();
+    }, [currentEmail])
+    
 
     // Event handler triggered when the calendar's date range changes
     const handleNavigate = (newDate) => {
@@ -19,7 +40,7 @@ const Display = ({ submit, setSubmit }) => {
 
     // This method fetches the items from the database.
     async function getItems() {
-        const response = await fetch(`${process.env.VITE_REACT_APP_SERVER_URI}/api/all`);
+        const response = await fetch(`${process.env.VITE_REACT_APP_SERVER_URI}/api/get/${currentEmail}`);
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`;
             console.error(message);
@@ -28,11 +49,6 @@ const Display = ({ submit, setSubmit }) => {
         const records = await response.json();
         setSavedData(sortByExpiryDate(records));
     }
-
-    // Fetch data upon load of webpage
-    useEffect(() => {
-        getItems(); // Fetch items when component mounts
-    }, []);
 
     // Load list again when new submission happens
     useEffect(() => {

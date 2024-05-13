@@ -6,7 +6,7 @@ import { itemSchema } from '../models/itemModel.js';
 const Item = mongoose.model('items', itemSchema);
 
 export const getMyItems = (req, res) => {
-    Item.find({ user: ObjectId.createFromHexString(req.params.userId) })
+    Item.find({ user: req.params.userId })
         .then(items => {
             res.json(items);
         })

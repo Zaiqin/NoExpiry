@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, TextField, Stack, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { auth } from '../firebase';
 
 const Form = ({ open, onClose, onSubmit }) => {
+
     const [formData, setFormData] = useState({
-        user: 'eepycar',
+        user: '',
         name: '',
         expiryDate: null, // Initialize date as null
     });
+
+    useEffect(() => {
+        // Listen for changes in authentication state
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                setFormData({ ...formData, user: user.email });
+            }
+        });
+
+        // Clean up function
+        return () => unsubscribe();
+    }, []); // Empty dependency array to run once on mount
+    
 
     const handleChange = (event) => {
         const { name, value } = event.target;
