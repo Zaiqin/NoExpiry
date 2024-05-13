@@ -1,0 +1,11 @@
+.rbc-toolbar button {
+    color: white; /* Change the color to white */
+}
+
+button.rbc-active {
+    color: black;
+}
+
+.rbc-toolbar-label {
+    font-size: large;
+}
