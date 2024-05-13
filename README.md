@@ -77,7 +77,4 @@ NoExpiry is built using a stack of modern technologies, including:
 
 ## Deployment
 
-This project is also deployed on Vercel
-
-- Frontend: ()
-- Backend: ()
+This project is also deployed on Vercel [here](https://no-expiry-client.vercel.app/)
