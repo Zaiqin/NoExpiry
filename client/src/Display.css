@@ -1,0 +1,17 @@
+.rbc-toolbar button {
+    color: white; /* Change the color to white */
+}
+
+button.rbc-active {
+    color: black;
+}
+
+.rbc-toolbar-label {
+    font-size: large;
+}
+
+.table-container {
+    max-height: 500px; /* Set the maximum height */
+    overflow-y: auto; /* Add vertical scrollbar when content overflows */
+    width: 70%;
+}

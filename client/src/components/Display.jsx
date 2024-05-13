@@ -3,7 +3,7 @@ import { Table, TableHead, TableBody, TableRow, TableCell, Typography, Container
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import '../calendar.css'
+import '../Display.css'
 
 const localizer = momentLocalizer(moment);
 
@@ -60,7 +60,7 @@ const Display = ({ submit, setSubmit }) => {
         const timeDiff = expiryDate - currentDate; // Difference in milliseconds
         const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        return `${days} days, ${hours} hours`;
+        return `${days} days, ${hours} hrs`;
     };
 
     // Function to sort savedData by expiry date
@@ -112,40 +112,35 @@ const Display = ({ submit, setSubmit }) => {
                 }}
             >
                 <Stack direction="row" spacing={3}>
-                    <Table sx={{
-                        border: 1,
-                        borderColor: "silver",
-                        borderRadius: 2,
-                        boxShadow: 4,
-                        p: 2,
-                        overflow: "auto",
-                    }}>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell sx={{ color: 'white' }}>User</TableCell>
-                                <TableCell sx={{ color: 'white' }}>Item Name</TableCell>
-                                <TableCell sx={{ color: 'white' }}>Expiry Date</TableCell>
-                                <TableCell sx={{ color: 'white' }}>Time to Expiry</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {savedData.map((item, index) => (
-                                <TableRow key={index}>
-                                    <TableCell sx={{ color: 'white' }}>{item.user}</TableCell>
-                                    <TableCell sx={{ color: 'white' }}>{item.name}</TableCell>
-                                    <TableCell sx={{ color: 'white' }}>{formatDate(item.expiryDate)}</TableCell>
-                                    <TableCell sx={{ color: 'white' }}>{calculateTimeToExpiry(item.expiryDate)}</TableCell>
+                    <div className="table-container">
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell sx={{ color: 'white' }}>User</TableCell>
+                                    <TableCell sx={{ color: 'white' }}>Item Name</TableCell>
+                                    <TableCell sx={{ color: 'white' }}>Expiry Date</TableCell>
+                                    <TableCell sx={{ color: 'white' }}>Time to Expiry</TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                            </TableHead>
+                            <TableBody>
+                                {savedData.map((item, index) => (
+                                    <TableRow key={index}>
+                                        <TableCell sx={{ color: 'white' }}>{item.user}</TableCell>
+                                        <TableCell sx={{ color: 'white' }}>{item.name}</TableCell>
+                                        <TableCell sx={{ color: 'white' }}>{formatDate(item.expiryDate)}</TableCell>
+                                        <TableCell sx={{ color: 'white' }}>{calculateTimeToExpiry(item.expiryDate)}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
                     <Calendar
                         localizer={localizer}
                         events={events}
                         startAccessor="start"
                         endAccessor="end"
                         defaultDate={new Date()}
-                        onSelectEvent={(event) => {}}
+                        onSelectEvent={(event) => { }}
                         style={{ height: 500, width: '100%', marginTop: "10px" }}
                         views={['month', 'week']}
                         dayPropGetter={getDayProp}
