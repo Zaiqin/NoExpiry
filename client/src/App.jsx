@@ -28,7 +28,7 @@ function App() {
   }, [])
 
   if (isFetching) {
-    return <h2>Fetching...</h2>
+    return <h2>Loading...</h2>
   }
 
   return (
