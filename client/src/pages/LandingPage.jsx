@@ -54,7 +54,7 @@ const LandingPage = ({ user }) => {
             <hr />
             <br />
             <Typography variant="p" paragraph>
-                This website was created using the following web technologies:
+                NoExpiry was created using the following web technologies:
             </Typography>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={1} rowGap={1}>
