@@ -97,7 +97,7 @@ const Display = ({ submit, setSubmit }) => {
         const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
         if (days < 0 || hours < 0) {
-            return `Expired ${(days+1)*-1} days, ${hours*-1} hrs ago`;
+            return `Expired ${(days + 1) * -1} days, ${hours * -1} hrs ago`;
         } else {
             return `${days} days, ${hours} hrs`;
         }
@@ -160,30 +160,30 @@ const Display = ({ submit, setSubmit }) => {
             if (!currentItem) {
                 throw new Error('Item not found in savedData');
             }
-    
+
             // Create a new object with the updated expiryDate and all other properties unchanged
             const updatedItem = {
                 ...currentItem,
                 expiryDate: newDate // Update the expiryDate property
             };
-    
+
             // Make the PUT request with the updated item
             const response = await fetch(`${process.env.VITE_REACT_APP_SERVER_URI}/api/edit/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedItem)
             });
-    
+
             if (!response.ok) {
                 throw new Error(`An error occurred: ${response.statusText}`);
             }
-            
+
             console.log('Item edited successfully');
             getItems();
         } catch (error) {
             console.error('Error editing item:', error.message);
         }
-    }  
+    }
 
     // This method deletes the selected item from the database.
     async function deleteItem(id) {
@@ -233,44 +233,51 @@ const Display = ({ submit, setSubmit }) => {
                     overflow: "auto",
                 }}
             >
-                <Stack direction={windowWidth < 1000? "column": "row"} spacing={3}>
-                        <Stack direction="column" spacing={3} sx={{
-                            border: 1,
-                            borderColor: "silver",
-                            borderRadius: 1,
-                            boxShadow: 4,
-                            p: 2,
-                            width: windowWidth < 1000 ? "95%" : "50vw",
-                            maxHeight: "55vh",
-                            overflow: "auto",
-                        }}>
+                <Stack direction={windowWidth < 1000 ? "column" : "row"} spacing={3}>
+                    <Stack direction="column" spacing={3} sx={{
+                        border: 1,
+                        borderColor: "silver",
+                        borderRadius: 1,
+                        boxShadow: 4,
+                        p: 2,
+                        width: windowWidth < 1000 ? "95%" : "50vw",
+                        maxHeight: "55vh",
+                        overflow: "auto",
+                    }}>
                         <div className="card-container">
-                        {savedData.map((item, index) => (
-                            <Card
-                                key={index}
-                                sx={{
-                                    borderRadius: 2,
-                                    marginBottom: 2,
-                                    textAlign: "left",
-                                    background: new Date(item.expiryDate) < new Date() ? "lightcoral" : "",
-                                }}
-                            >
-                                <CardContent style={{ paddingBottom: "10px" }}>
-                                    <Box sx={{ color: 'text.primary', fontSize: 18, fontWeight: 'bold' }}>{item.name}</Box>
-                                    <Box sx={{ color: 'text.secondary', fontSize: 16, fontWeight: 'medium' }}>
-                                        Expiry Date: {formatDate(item.expiryDate)}
-                                    </Box>
-                                    <Box sx={{ color: 'text.secondary', fontSize: 16, fontWeight: 'medium' }}>
-                                        {"("}{calculateTimeToExpiry(item.expiryDate)}{")"}
-                                    </Box>
-                                    <Box sx={{ color: 'success.dark', fontWeight: 'medium', fontSize: 16 }}>
-                                        {item.category}
-                                    </Box>
-                                    <IconButton onClick={() => handleEditClick(item._id)}><EditCalendarIcon /></IconButton>
-                                    <IconButton onClick={() => deleteItem(item._id)}><DeleteIcon /></IconButton>
-                                </CardContent>
-                            </Card>
-                        ))}</div>
+                            {savedData.length === 0 ? (
+                                <h2>Fetching your items...</h2>
+                            ) : (
+                                <div className="card-container">
+                                    {savedData.map((item, index) => (
+                                        <Card
+                                            key={index}
+                                            sx={{
+                                                borderRadius: 2,
+                                                marginBottom: 2,
+                                                textAlign: "left",
+                                                background: new Date(item.expiryDate) < new Date() ? "lightcoral" : "",
+                                            }}
+                                        >
+                                            <CardContent style={{ paddingBottom: "10px" }}>
+                                                <Box sx={{ color: 'text.primary', fontSize: 18, fontWeight: 'bold' }}>{item.name}</Box>
+                                                <Box sx={{ color: 'text.secondary', fontSize: 16, fontWeight: 'medium' }}>
+                                                    Expiry Date: {formatDate(item.expiryDate)}
+                                                </Box>
+                                                <Box sx={{ color: 'text.secondary', fontSize: 16, fontWeight: 'medium' }}>
+                                                    {"("}{calculateTimeToExpiry(item.expiryDate)}{")"}
+                                                </Box>
+                                                <Box sx={{ color: 'success.dark', fontWeight: 'medium', fontSize: 16 }}>
+                                                    {item.category}
+                                                </Box>
+                                                <IconButton onClick={() => handleEditClick(item._id)}><EditCalendarIcon /></IconButton>
+                                                <IconButton onClick={() => deleteItem(item._id)}><DeleteIcon /></IconButton>
+                                            </CardContent>
+                                        </Card>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </Stack>
                     <Calendar
                         localizer={localizer}
@@ -279,7 +286,7 @@ const Display = ({ submit, setSubmit }) => {
                         endAccessor="end"
                         defaultDate={new Date()}
                         onSelectEvent={(event) => { }}
-                        style={{ height: 500, width: '100%', maxHeight: "60vh" }}
+                        style={{ height: 500, width: '100%', maxHeight: "59vh" }}
                         views={['month', 'week']}
                         dayPropGetter={getDayProp}
                         onNavigate={handleNavigate}

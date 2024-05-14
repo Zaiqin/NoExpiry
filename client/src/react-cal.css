@@ -68,3 +68,7 @@
 .rbc-show-more {
     background-color: white; 
 }
+
+.rbc-toolbar-label {
+    margin: 5px;
+}

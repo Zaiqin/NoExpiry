@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography } from '@mui/material'
+import { Typography, Grid } from '@mui/material'
 import { useEffect } from 'react'
 import Display from '../components/Display'
 import Form from '../components/Form'
@@ -25,11 +25,12 @@ const Home = () => {
 
     return (
         <div>
-            <Typography sx={{ fontSize: 30 }}>Welcome back! Here are your items:</Typography>
-            <br />
+            <Grid container justifyContent="flex-start">
+                <Typography variant="h4" sx={{ ml: 2, mb: 2 }}>Dashboard</Typography>
+            </Grid>
             <Form open={isFormOpen} onClose={handleCloseForm} onSubmit={handleSubmit} />
             <Display submit={newSubmission} setSubmit={setNewSubmission} />
-            <Container sx={{ textAlign: 'left', mt: 2, mb: 5, minWidth: "100%" }}>
+            <Container sx={{ textAlign: 'center', mt: 2, mb: 5, minWidth: "100%" }}>
                 <Stack direction="row" spacing={2}>
                     <Button sx={{ boxShadow: 1 }} onClick={handleOpenForm} variant="contained" color="primary">Add New Item</Button>
                 </Stack>
