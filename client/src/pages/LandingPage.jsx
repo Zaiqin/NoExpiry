@@ -1,8 +1,12 @@
 // LandingPage.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const LandingPage = () => {
+const LandingPage = ({user}) => {
+    if (user) {
+        return <Navigate to="/home" ></Navigate>
+    }
+
     return (
         <div>
             <h1>Welcome to NoExpiry!</h1>
