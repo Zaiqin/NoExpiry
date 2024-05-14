@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css'
 import Home from './pages/Home'
 import LandingPage from './pages/LandingPage';
+import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import { onAuthStateChanged } from 'firebase/auth';
 import { ProtectedRoute } from './components/protectedRoute';
@@ -42,6 +43,7 @@ function App() {
             </ProtectedRoute>
           } />
           <Route path="/" element={<LandingPage user={user}/>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>
