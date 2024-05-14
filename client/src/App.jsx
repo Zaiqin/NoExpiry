@@ -11,6 +11,7 @@ import { auth } from './firebase';
 function App() {
   const [user, setUser] = useState(null)
   const [isFetching, setIsFetching] = useState(true)
+  const navHeight = "70px";
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -31,8 +32,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <Navbar />
+      <div style={{ paddingTop: navHeight }}> {/* Add padding top for the navbar */}
+        <Navbar navHeight={navHeight}/>
         <Routes>
           <Route path="/home" element={
             <ProtectedRoute user={user}>
