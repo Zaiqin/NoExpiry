@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import { onAuthStateChanged } from 'firebase/auth';
 import { ProtectedRoute } from './components/protectedRoute';
 import { auth } from './firebase';
+import logo from '../public/noexpirylogo.ico'
 
 function App() {
   const [user, setUser] = useState(null)
