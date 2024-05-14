@@ -18,6 +18,7 @@ const Display = ({ submit, setSubmit }) => {
     const [editDialogOpen, setEditDialogOpen] = useState(false); // State to control the visibility of the edit dialog
     const [editItemId, setEditItemId] = useState(null); // State to store the ID of the item being edited
     const [windowWidth, setWindowWidth] = useState(window.innerWidth); // State to track window width
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
         // Listen for changes in authentication state
@@ -65,6 +66,7 @@ const Display = ({ submit, setSubmit }) => {
             console.error(message);
             return [];
         }
+        setLoaded(true)
         const items = await response.json();
         setSavedData(sortByExpiryDate(items));
     }
@@ -245,7 +247,7 @@ const Display = ({ submit, setSubmit }) => {
                         overflow: "auto",
                     }}>
                         <div className="card-container">
-                            {savedData.length === 0 ? (
+                            {loaded === false ? (
                                 <h2>Fetching your items...</h2>
                             ) : (
                                 <div className="card-container">
