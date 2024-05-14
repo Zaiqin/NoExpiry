@@ -10,7 +10,7 @@ NoExpiry is a webapp designed to help you track the expiry dates of your food it
 - View which items are expiring soon and/or have expired
 
 ## Technologies
-[![My Skills](https://skillicons.dev/icons?i=react,vite,tailwind,nodejs,express,mongodb,vercel,html,css,js,github&theme=dark)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=react,vite,tailwind,firebase,nodejs,express,mongodb,vercel,html,css,js,github&theme=dark)](https://skillicons.dev)
 
 NoExpiry is built using a stack of modern technologies, including:
 
@@ -34,9 +34,11 @@ NoExpiry is built using a stack of modern technologies, including:
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=vercel)
+![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
 - **Node.js and Express.js**: Powering the backend server and API development.
 - **MongoDB**: A NoSQL database used for storing and managing items.
 - **Vercel**: Used for hosting both the frontend and backend server and ensuring reliable deployment.
+- **Vercel**: Used for user authentication.
 
 ## Setup Instructions
 
