@@ -1,6 +1,6 @@
 # NoExpiry
 
-NoExpiry is a webapp designed to help you track the expiry dates of your food items effortlessly. With NoExpiry, you can easily add food items to your inventory and set expiry dates. At a glance, you can easily see what are the food items expiring soon and how long it has left without needing to remember or check your fridge.
+NoExpiry is a web app designed to help you track the expiry dates of your food items effortlessly. With NoExpiry, you can easily add food items to your inventory and set expiry dates. At a glance, you can easily see what are the food items expiring soon and how long it has left without needing to remember or check your fridge.
 
 ![image](https://raw.githubusercontent.com/Zaiqin/NoExpiry/main/client/src/assets/screenshot.png)
 
