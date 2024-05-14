@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { Container, Typography, Button, Stack, Box } from '@mui/material';
+import { Container, Typography, Stack, Box } from '@mui/material';
 import AuthGoogle from '../components/AuthGoogle';
 import image1 from '../assets/assortment-compost-made-rotten-food-with-copy-space_23-2149073784.jpg';
 import image2 from '../assets/top-view-recycling-bin-with-organic-vegetables_23-2148666785.jpg'

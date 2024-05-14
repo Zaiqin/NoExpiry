@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
 import Home from './pages/Home'
 import LandingPage from './pages/LandingPage';
@@ -8,7 +8,6 @@ import Navbar from './components/Navbar';
 import { onAuthStateChanged } from 'firebase/auth';
 import { ProtectedRoute } from './components/protectedRoute';
 import { auth } from './firebase';
-import logo from '../public/noexpirylogo.ico'
 
 function App() {
   const [user, setUser] = useState(null)
