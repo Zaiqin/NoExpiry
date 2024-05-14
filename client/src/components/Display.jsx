@@ -240,7 +240,7 @@ const Display = ({ submit, setSubmit }) => {
                         borderRadius: 1,
                         boxShadow: 4,
                         p: 2,
-                        width: windowWidth < 1000 ? "95%" : "50vw",
+                        width: windowWidth < 1000 ? "90%" : "50vw",
                         maxHeight: "55vh",
                         overflow: "auto",
                     }}>
