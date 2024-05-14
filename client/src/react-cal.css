@@ -55,3 +55,16 @@
 .react-calendar__month-view__weekdays__weekday {
     color: white;
 }
+
+.rbc-overlay {
+    background-color: #242424;
+    border-radius: 10%;
+}
+
+.rbc-overlay-header {
+    color: white;
+}
+
+.rbc-show-more {
+    background-color: white; 
+}

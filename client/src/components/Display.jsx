@@ -17,7 +17,7 @@ const Display = ({ submit, setSubmit }) => {
     const [currentEmail, setCurrentEmail] = useState();
     const [editDialogOpen, setEditDialogOpen] = useState(false); // State to control the visibility of the edit dialog
     const [editItemId, setEditItemId] = useState(null); // State to store the ID of the item being edited
-
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth); // State to track window width
 
     useEffect(() => {
         // Listen for changes in authentication state
@@ -37,6 +37,20 @@ const Display = ({ submit, setSubmit }) => {
         if (currentEmail) getItems();
     }, [currentEmail])
 
+    useEffect(() => {
+        // Function to update window width state
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        // Add event listener for window resize
+        window.addEventListener('resize', handleResize);
+
+        // Remove event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     // Event handler triggered when the calendar's date range changes
     const handleNavigate = (newDate) => {
@@ -219,19 +233,18 @@ const Display = ({ submit, setSubmit }) => {
                     overflow: "auto",
                 }}
             >
-                <Stack direction="row" spacing={3}>
-                    <Stack direction="column" spacing={3} sx={{
-                        border: 1,
-                        borderColor: "silver",
-                        borderRadius: 1,
-                        boxShadow: 4,
-                        p: 2,
-                        width: "50vw",
-                        maxHeight: "55vh",
-                        overflow: "auto",
-                    }}>
+                <Stack direction={windowWidth < 1000? "column": "row"} spacing={3}>
+                        <Stack direction="column" spacing={3} sx={{
+                            border: 1,
+                            borderColor: "silver",
+                            borderRadius: 1,
+                            boxShadow: 4,
+                            p: 2,
+                            width: windowWidth < 1000 ? "95%" : "50vw",
+                            maxHeight: "55vh",
+                            overflow: "auto",
+                        }}>
                         <div className="card-container">
-                        {!savedData && (<p>Loading...</p>)}
                         {savedData.map((item, index) => (
                             <Card
                                 key={index}
@@ -243,14 +256,14 @@ const Display = ({ submit, setSubmit }) => {
                                 }}
                             >
                                 <CardContent style={{ paddingBottom: "10px" }}>
-                                    <Box sx={{ color: 'text.primary', fontSize: 20, fontWeight: 'bold' }}>{item.name}</Box>
-                                    <Box sx={{ color: 'text.secondary', fontSize: 18, fontWeight: 'medium' }}>
+                                    <Box sx={{ color: 'text.primary', fontSize: 18, fontWeight: 'bold' }}>{item.name}</Box>
+                                    <Box sx={{ color: 'text.secondary', fontSize: 16, fontWeight: 'medium' }}>
                                         Expiry Date: {formatDate(item.expiryDate)}
                                     </Box>
-                                    <Box sx={{ color: 'text.secondary', fontSize: 18, fontWeight: 'medium' }}>
+                                    <Box sx={{ color: 'text.secondary', fontSize: 16, fontWeight: 'medium' }}>
                                         {"("}{calculateTimeToExpiry(item.expiryDate)}{")"}
                                     </Box>
-                                    <Box sx={{ color: 'success.dark', fontWeight: 'medium', fontSize: 18 }}>
+                                    <Box sx={{ color: 'success.dark', fontWeight: 'medium', fontSize: 16 }}>
                                         {item.category}
                                     </Box>
                                     <IconButton onClick={() => handleEditClick(item._id)}><EditCalendarIcon /></IconButton>
@@ -271,6 +284,7 @@ const Display = ({ submit, setSubmit }) => {
                         dayPropGetter={getDayProp}
                         onNavigate={handleNavigate}
                         eventPropGetter={eventStyleGetter}
+                        popup
                     />
                 </Stack>
             </Container>
