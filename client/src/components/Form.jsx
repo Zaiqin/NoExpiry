@@ -10,6 +10,7 @@ const Form = ({ open, onClose, onSubmit }) => {
     const [formData, setFormData] = useState({
         user: '',
         name: '',
+        notes: '',
         expiryDate: null, // Initialize date as null
     });
 
@@ -85,6 +86,15 @@ const Form = ({ open, onClose, onSubmit }) => {
                                 
                             />
                         </LocalizationProvider>
+                        <TextField
+                            name="notes"
+                            label="Notes (Optional)"
+                            variant="outlined"
+                            value={formData.notes}
+                            multiline
+                            rows={2}
+                            onChange={handleChange}
+                        />
                     </Stack>
                 </form>
             </DialogContent>

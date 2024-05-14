@@ -99,9 +99,17 @@ const Display = ({ submit, setSubmit }) => {
         const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
         if (days < 0 || hours < 0) {
-            return `Expired ${(days + 1) * -1} days, ${hours * -1} hrs ago`;
+            const expiredDays = (days + 1) * -1;
+            const expiredHours = hours * -1;
+
+            const daysString = `${expiredDays} ${expiredDays > 1 ? "days" : "day"}`;
+            const hoursString = expiredHours > 0 ? `, ${expiredHours} ${expiredHours > 1 ? "hrs" : "hr"}` : "";
+
+            return `Expired ${daysString}${hoursString} ago`;
         } else {
-            return `${days} days, ${hours} hrs`;
+            const daysString = `${days} ${days > 1 ? "days" : "day"}`;
+            const hoursString = hours > 0 ? `, ${hours} ${hours > 1 ? "hrs" : "hr"}` : "";
+            return `${daysString}${hoursString}`;
         }
     };
 
@@ -144,9 +152,10 @@ const Display = ({ submit, setSubmit }) => {
     const eventStyleGetter = (event, start, end, isSelected) => {
         // Check if the event is expired
         const isExpired = new Date(event.end) < new Date();
+        const diff = Math.round((new Date(end).getTime() - new Date().getTime())/(1000 * 3600 * 24))
         return {
             style: {
-                backgroundColor: isExpired ? "#e94949" : "", // Red for expired events, green for others
+                backgroundColor: isExpired ? "#e94949" : diff < 7 ?  "orange" : "", // Red for expired events, green for others
                 borderRadius: "0px",
                 border: "none",
                 color: "white",
@@ -260,10 +269,11 @@ const Display = ({ submit, setSubmit }) => {
                                                 borderRadius: 2,
                                                 marginBottom: 2,
                                                 textAlign: "left",
-                                                background: new Date(item.expiryDate) < new Date() ? "lightcoral" : "",
+                                                background: Math.round((new Date(item.expiryDate).getTime() - new Date().getTime())/(1000 * 3600 * 24)) < 0 ? "#e94949" 
+                                                : Math.round((new Date(item.expiryDate).getTime() - new Date().getTime())/(1000 * 3600 * 24)) < 7 ? "orange" : "",
                                             }}
                                         >
-                                            <CardContent style={{ paddingBottom: "10px" }}>
+                                            <CardContent style={{ paddingBottom: "10px" }} >
                                                 <Box sx={{ color: 'text.primary', fontSize: 18, fontWeight: 'bold' }}>
                                                     {item.name}
                                                 </Box>
@@ -273,9 +283,23 @@ const Display = ({ submit, setSubmit }) => {
                                                 <Box sx={{ color: 'text.secondary', fontSize: 16, fontWeight: 'medium' }}>
                                                     ({calculateTimeToExpiry(item.expiryDate)})
                                                 </Box>
-                                                <Box sx={{ color: 'success.dark', fontWeight: 'medium', fontSize: 16 }}>
-                                                    {item.category}
-                                                </Box>
+                                                {item.notes && (
+                                                    <>
+                                                        <hr color="#303030" />
+                                                        <Box
+                                                            sx={{
+                                                                color: 'text.secondary',
+                                                                fontSize: 16,
+                                                                fontWeight: 'medium',
+                                                                wordWrap: 'break-word',
+                                                                whiteSpace: 'pre-wrap'
+                                                            }}
+                                                        >
+                                                            Notes: {item.notes}
+                                                        </Box>
+                                                    </>
+                                                )}
+                                                <hr color="#303030" />
                                                 <IconButton onClick={() => handleEditClick(item._id)}>
                                                     <EditCalendarIcon />
                                                 </IconButton>
