@@ -2,7 +2,7 @@
 
 NoExpiry is a webapp designed to help you track the expiry dates of your food items effortlessly. With NoExpiry, you can easily add food items to your inventory and set expiry dates. At a glance, you can easily see what are the food items expiring soon and how long it has left without needing to remember or check your fridge.
 
-![image](https://raw.githubusercontent.com/Zaiqin/NoExpiry/main/client/src/assets/webscreenshot.png)
+![image](https://raw.githubusercontent.com/Zaiqin/NoExpiry/main/client/src/assets/sitescreenshot.png)
 
 ## Features
 
@@ -40,46 +40,7 @@ NoExpiry is built using a stack of modern technologies, including:
 - **Node.js and Express.js**: Powering the backend server and API development.
 - **MongoDB**: A NoSQL database used for storing and managing items.
 - **Vercel**: Used for hosting both the frontend and backend server and ensuring reliable deployment.
-- **Vercel**: Used for user authentication.
-
-## Setup Instructions
-
-1. Clone the repository:
-
-   ```
-   git clone https://github.com/Zaiqin/NoExpiry.git
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   cd client
-   npm install
-
-   cd ../server
-   npm install
-   ```
-
-3. Configure environment variables:
-
-   - Create a `.env` file in the `server` directory.
-   - Define necessary environment variables, such as database connection strings and API keys.
-
-4. Start the backend server:
-
-   ```bash
-   cd server
-   node --env-file=config.env server
-   ```
-
-5. Start the frontend development server:
-
-   ```bash
-   cd client
-   npm run dev
-   ```
-
-5. Access the application in your browser
+- **Firebase**: Used for user authentication.
 
 ## Deployment
 
