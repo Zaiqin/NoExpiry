@@ -247,8 +247,10 @@ const Display = ({ submit, setSubmit }) => {
                         overflow: "auto",
                     }}>
                         <div className="card-container">
-                            {loaded === false ? (
+                            {!loaded ? (
                                 <h2>Fetching your items...</h2>
+                            ) : savedData.length === 0 ? (
+                                <h2>No items to show</h2>
                             ) : (
                                 <div className="card-container">
                                     {savedData.map((item, index) => (
@@ -262,18 +264,24 @@ const Display = ({ submit, setSubmit }) => {
                                             }}
                                         >
                                             <CardContent style={{ paddingBottom: "10px" }}>
-                                                <Box sx={{ color: 'text.primary', fontSize: 18, fontWeight: 'bold' }}>{item.name}</Box>
+                                                <Box sx={{ color: 'text.primary', fontSize: 18, fontWeight: 'bold' }}>
+                                                    {item.name}
+                                                </Box>
                                                 <Box sx={{ color: 'text.secondary', fontSize: 16, fontWeight: 'medium' }}>
                                                     Expiry Date: {formatDate(item.expiryDate)}
                                                 </Box>
                                                 <Box sx={{ color: 'text.secondary', fontSize: 16, fontWeight: 'medium' }}>
-                                                    {"("}{calculateTimeToExpiry(item.expiryDate)}{")"}
+                                                    ({calculateTimeToExpiry(item.expiryDate)})
                                                 </Box>
                                                 <Box sx={{ color: 'success.dark', fontWeight: 'medium', fontSize: 16 }}>
                                                     {item.category}
                                                 </Box>
-                                                <IconButton onClick={() => handleEditClick(item._id)}><EditCalendarIcon /></IconButton>
-                                                <IconButton onClick={() => deleteItem(item._id)}><DeleteIcon /></IconButton>
+                                                <IconButton onClick={() => handleEditClick(item._id)}>
+                                                    <EditCalendarIcon />
+                                                </IconButton>
+                                                <IconButton onClick={() => deleteItem(item._id)}>
+                                                    <DeleteIcon />
+                                                </IconButton>
                                             </CardContent>
                                         </Card>
                                     ))}
