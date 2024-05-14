@@ -1,11 +1,13 @@
 # NoExpiry
 
-A mini project to track food items' expiry dates. Created using the MERN stack
+NoExpiry is a webapp designed to help you track the expiry dates of your food items effortlessly. With NoExpiry, you can easily add food items to your inventory and set expiry dates. At a glance, you can easily see what are the food items expiring soon and how long it has left without needing to remember or check your fridge.
 
 ## Features
 
-- Add Item
-- View Item in Calendar and Table Form
+- Add/Delete items
+- View items in Calendar and Table Form
+- Edit item expiry dates
+- View which items are expiring soon and/or have expired
 
 ## Technologies
 [![My Skills](https://skillicons.dev/icons?i=react,vite,tailwind,nodejs,express,mongodb,vercel,html,css,js,github&theme=dark)](https://skillicons.dev)
