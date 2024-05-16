@@ -10,7 +10,7 @@ const AuthGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         navigate("/home"); // Navigate to /home after successful sign-in
       })
       .catch((error) => {
